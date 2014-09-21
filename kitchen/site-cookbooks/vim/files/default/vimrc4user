@@ -39,11 +39,11 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 
   " Required:
-  set runtimepath+=/home/vagrant/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Required:
-call neobundle#begin(expand('/home/vagrant/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'git://github.com/Shougo/neobundle.vim.git'

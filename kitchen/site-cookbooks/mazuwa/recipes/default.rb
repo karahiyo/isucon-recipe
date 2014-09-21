@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w{ncurses ncurses-devel rpm-build gcc gdbm gdbm-devel htop mosh vim tree nkf}.each do |pkg|
+%w{ncurses ncurses-devel rpm-build gcc gdbm gdbm-devel htop mosh vim tree }.each do |pkg|
   package pkg do
     action :install
   end

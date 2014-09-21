@@ -67,33 +67,6 @@ alias tmn='tmux new-session -s'
 # こうすると、 Ctrl-W でカーソル前の1単語を削除したとき、 / までで削除が止まる
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-#==========##
-## HISTORY ##
-##==========#
-HISTFILE=~/.zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
-## zsh の開始, 終了時刻をヒストリファイルに書き込む
-setopt extended_history
-## 直前と同じコマンドをヒストリに追加しない
-setopt hist_ignore_dups
-setopt hist_ignore_all_dups
-## ヒストリを呼び出してから実行する間に一旦編集
-setopt hist_verify
-## ヒストリを共有
-setopt share_history
-## コマンドラインの先頭がスペースで始まる場合ヒストリに追加しない
-setopt hist_ignore_space
-autoload history-search-end
-## すぐにヒストリファイルに追記する。
-setopt inc_append_history
-## C-sでのヒストリ検索が潰されてしまうため、出力停止・開始用にC-s/C-qを使わない。
-setopt no_flow_control
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
-
 
 #=========##
 ### PROMPT ##
@@ -110,15 +83,60 @@ YELLOW="%{${fg[yellow]}%}"
 MAGENTA="%{${fg[magenta]}%}"
 WHITE="%{${fg[white]}%}"
 
-PROMPT="${WHITE}%m${RED}%B[%n@%c]%b${RESET}
+PROMPT="${WHITE}%m${CYAN}%B[%n@%c]%b${RESET}
 %D{%T} + "
 PROMPT2="%B%{<1b>[33m%}%_%{<1b>[m%}%b "
 SPROMPT="${RESET}${RED}%r is correct? [n,y,a,e]:${RESET} "
 RPROMPT="${YELLOW}[%~]"
 
+
+PATH=$PATH:/usr/local/src/tapinfo
+
 # リダイレクト時の上書き防止
 # set -o noclobber
 unset noclobber
+
+set color
+
+#======#
+# Java #
+#======#
+#export JAVA_HOME=/usr/java/default
+#export PATH=$PATH:$JAVA_HOME/bin
+#export CLASSPATH=$CLASSPATH:.:/usr/java
+
+
+#===========#
+#   td      #
+#===========#
+export PATH=$PATH:/usr/lib64/fluent/ruby/bin
+export TD_HOME=/usr/lib64/fluent
+export FLUENT_GEM_HOME=/usr/lib64/fluent/ruby/lib/ruby/gems/1.9.1/gems
+
+# リダイレクト時の上書き防止
+# set -o noclobber
+unset noclobber
+
+
+#====##
+## z ##
+##====#
+if [ -e ~/.zsh/z/z.sh ]; then
+	source ~/.zsh/z/z.sh
+	_Z_CMD=j
+	precmd() {
+		_z --add "$(pwd -P)"
+	}
+fi
+
+## systemstat
+export PATH=$PATH:/usr/lib64/sa
+
+#==================##
+## zsh-completions ##
+##==================#
+fpath=(/usr/local/share/zsh-completions/src $fpath)
+#PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
 
 #==================##
 ## zsh-completions ##
@@ -129,3 +147,4 @@ fpath=(/usr/local/share/zsh-completions/src $fpath)
 ## source zsh-syntax-highlighting #
 ##================================#
 [[ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+

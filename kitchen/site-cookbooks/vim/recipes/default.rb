@@ -20,7 +20,6 @@ bash "install vim 7.4" do
 		--enable-multibyte \
 		--enable-rubyinterp \
 		--enable-pythoninterp \
-		--enable-perlinterp \
 		--enable-luainterp \
 		--enable-gpm \
 		--enable-cscope \
@@ -30,12 +29,12 @@ bash "install vim 7.4" do
 	not_if "test -e /usr/local/bin/vim"
 end
 
-## for vagrant
-cookbook_file '/home/vagrant/.vimrc' do
-	source "vimrc4vagrant"
+## for user
+cookbook_file "/home/#{node['user']}/.vimrc" do
+	source "vimrc4user"
 	mode "644"
-	user "vagrant"
-	group "vagrant"
+	user "#{node['user']}"
+	group "#{node['user']}"
 end
 
 ## for root

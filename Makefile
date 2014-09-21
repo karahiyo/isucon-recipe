@@ -3,9 +3,7 @@ MAKE=$(shell which make)
 
 TARGET=isucon
 
-setup: bundle, chef-setup
-
-bundle:
+install:
 	$(BUNDLE) install --path vendor/bundle $(BUNDLE_OPTION)
 
 chef-setup:
@@ -14,3 +12,5 @@ chef-setup:
 cook:
 	$(MAKE) -C kitchen cook TARGET=$(TARGET)
 
+clean:
+	$(MAKE) -C kitchen clean TARGET=$(TARGET)

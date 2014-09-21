@@ -1,0 +1,17 @@
+{
+  "run_list": [
+		"yum",
+		"recipe[update]",
+		"recipe[yum-epel]",
+		"recipe[git]",
+		"recipe[mazuwa]",
+		"recipe[zsh]",
+		"recipe[vim]",
+		"recipe[tmux]",
+		"recipe[post-setup]"
+  ],
+  "automatic": {
+    "ipaddress": "isucon"
+  }
+}
+

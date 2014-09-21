@@ -1,5 +1,4 @@
-TARGET=zeus
-
+TARGET=
 CWD=`pwd`
 
 BUNDLE=$(shell which bundle)
@@ -19,3 +18,7 @@ setup-ssl:
 
 berks:
 	${BUNDLE} exec berks vendor #--path cookbooks
+
+clean:
+	$(BUNDLE) exec knife solo clean $(TARGET)
+
