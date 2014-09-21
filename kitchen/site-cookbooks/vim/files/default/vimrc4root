@@ -1,0 +1,233 @@
+" ------------------------------------------------------------
+" 基本的な設定
+" ------------------------------------------------------------
+syntax on
+" colorscheme shandy
+colorscheme jellybeans
+set nocompatible  " vimです
+set fileformats=unix,dos,mac " 改行コードの自動認識
+set vb t_vb= " ビープ音をならさない
+set scrolloff=5 " スクロール時の余白確保
+
+" バックアップを取らない
+set nobackup
+
+
+" ------------------------
+" 表示関係
+" -------------------------
+set number
+set showmode                     " 現在のモードを表示
+set modelines=0                  " モードラインは無効
+set title
+set ruler
+set list
+set listchars=tab:»-,trail:-,nbsp:%
+set display=uhex
+set t_Co=256
+set showcmd
+set showmatch
+set laststatus=2
+set autoindent " 新しいインデントを現在行と同じにする
+
+nnoremap ,vs :VimShell<CR>
+
+let g:accelerated_jk_acceleration_table = [5,3,1]
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+
+filetype plugin indent on
+
+" <C-k> にマッピング
+" for snippets
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" <C-h>や<BS>を押したときに確実にポップアップを削除します
+inoremap <expr><C-h> neocomplcache#smart_close_popup().”\<C-h>”
+"tabで補完候補の選択を行う
+inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+    set conceallevel=2 concealcursor=i
+endif
+
+"-------------------------------------------------------------------setting neocomplcache
+" 補完ウィンドウの設定
+set completeopt=menuone
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" 起動時に有効化
+let g:neocomplcache_enable_at_startup = 1
+" 大文字が入力されるまで大文字小文字の区別を無視する
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" _(アンダースコア)区切りの補完を有効化
+let g:neocomplcache_enable_underbar_completion = 1
+" シンタックスをハイライトするときの最小文字列
+let g:neocomplcache_min_syntax_length = 3
+" ポップアップメニューで表示される候補の数
+let g:neocomplcache_max_list = 20
+
+if !exists('g:neocomplcache_keyword_patterns')
+        let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+
+
+
+
+
+" ---------------------
+" プログラム
+" ----------------------
+set smartindent
+" set nosmartindent
+set expandtab
+set ts=4 sw=4 sts=0
+set smarttab
+set whichwrap=,s,h,l,<,>,[,]
+
+set ignorecase
+set smartcase
+set wrapscan
+set noincsearch
+
+" カーソル行をハイライト
+set cursorline
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
+augroup END
+
+hi clear CursorLine
+hi CursorLine gui=underline
+highlight CursorLine ctermbg=black guibg=black
+
+" コマンド実行中は再描画しない
+set lazyredraw
+
+" .rbでタブ幅を変更
+au BufNewFile,BufRead *.rb set nowrap tabstop=2 shiftwidth=2
+
+" 保存時に行末の空白を除去する
+" autocmd BufWritePre * :%s/\s\+$//ge
+
+" vimgrep検索時に結果一覧を自動的に開く
+augroup grepopen
+  autocmd!
+  autocmd QuickFixCmdPost vimgrep cw
+  autocmd QuickFixCmdPost grep cw
+augroup END
+
+" CTRL-hjklでウィンドウ移動
+nnoremap 0 ^
+nnoremap 9 $
+
+" visualmodeでインテントを＞＜の連打で変更できるようにする
+vnoremap < <gv
+vnoremap > >gv
+
+" ファイルを開いた時に最後のカーソル位置を再現する
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+" 無限undo
+if has('persistent_undo')
+  set undodir=~/.vim/undo
+  set undofile
+endif
+
+" 検索語が真ん中に来るようにする
+nmap n nzz
+nmap N Nzz
+nmap * *zz
+" nmap # #zz
+" inoremap # a<C-H>#
+nmap g* g*zz
+nmap g# g#zz
+
+
+" ヘルプを日本語に
+set helplang=ja
+
+" Java用ハイライト
+let java_highlight_all=1
+let java_highlight_debug=1
+let java_highlight_functions=1
+" let java_space_errors=1
+
+
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match ZenkakuSpace /　/
+
+" let java_highlight_java_beans=1
+
+au BufNewFile,BufRead * match ZenkakuSpace /　/
+
+"--------------------------------------------------------------> bind
+
+set backspace=2
+
+nnoremap j gj
+nnoremap k gk
+
+inoremap jj <Esc>
+
+" ----------------
+" オートコマンド
+" ---------------
+if has("autocmd")
+    " ファイルタイプ別インデント、プラグインを有効にする
+    filetype plugin indent on
+    " カーソル位置を記憶する
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g'\"" |
+        \ endif
+endif
+
+
+
+" --------------------
+" 国際化関係
+" --------------------
+" 文字コードの設定
+" fileencordingsの設定ではencordingの値を一番最後に記述する
+
+filetype on
+set encoding=utf-8
+autocmd FileType c,cpp,perl,java set cindent
+autocmd FileType java :set fileencoding=utf-8
+autocmd FileType python :set fileencoding=utf-8
+autocmd FileType ruby :set fileencoding=utf-8
+autocmd FileType php :set dictionary=~/.vim/dict/php.dict
+autocmd FileType ruby :set dictionary=~/.vim/dict/ruby.dict
+
+
+set shiftwidth=4
+set enc=utf-8
+ set fenc=utf-8
+" set enc=sjis
+" set fenc=sjis
+ set termencoding=utf-8
+ set fileencoding=utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
+set hlsearch
+
+" 挿入モードでのカーソル移動
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+

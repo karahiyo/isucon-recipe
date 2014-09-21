@@ -1,0 +1,5 @@
+.memo
+.*.swp
+/.vagrant
+.DS_Store
+/vendor/bundle
