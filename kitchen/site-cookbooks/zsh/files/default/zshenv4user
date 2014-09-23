@@ -1,89 +1,14 @@
 export LANG=ja_JP.UTF-8
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-export PATH=$PATH:~/.tmux
+export PATH=/bin:/sbin:$PATH
+export PATH=/usr/sbin:/usr/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-if [ -f ~/.zshrc ]; then
-    . ~/.zshrc
-fi
-
-# sudo時の補完も有効に
-# complete -cf sudo
-
-#================================##
-## Version Control for Languages ##
-##================================#
-# rbenv
-export RBENV_ROOT=/usr/local/rbenv
-export PATH="${RBENV_ROOT}/bin:$PATH"
-eval "$(rbenv init -)"
-
-# ruby
-export GEM_HOME=~/.gem/ruby/2.1.0
-export PATH=${GEM_HOME}/bin:$PATH
-
-# phpenv
-
-# perlbrew
-
-# pythonbrew
-
-#===========#
-#
-# EDITOR
-#
-export EDITOR=/usr/local/bin/vim
-
-######################
-#
-#    PATH
-#
-#####################
-export PATH=$PATH:/bin:/sbin
-export PATH=$PATH:/usr/sbin:/usr/bin
-export PATH=$PATH:/usr/local/bin:/usr/local/sbin
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/ant/bin:$PATH
-
-
-
-export PATH=$PATH:/usr/bin
-export PAYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-
-#===========#
-# libevent  #
-#===========#
-export LD_RUN_PATH=/usr/local/lib
-export LD_LIBRARY_PATH=/usr/local/lib
-
-#======#
-# Java #
-#======#
-#export VIMRUNTIME=/usr/share/vim/vim73
-alias javac='javac -J-Dfile.encoding=UTF-8'
-alias java='java -Dfile.encoding=UTF-8'
-
-#====================#
-#     node.js        #
-#====================#
-export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules:~/.node/v0.10.12/lib/node_modules:~/node_modules:
-
-#socket.io
-export NODE_PATH=$NODE_PATH:~/node_modules/socket.io/node_modules
-# express
-export NODE_PATH=$NODE_PATH:~/node_modules/express/node_modules
-export PATH=$PATH:~/node_modules/express/bin
-#forever
-export NODE_PATH=$NODE_PATH:~/node_modules/forever/node_modules
-export PATH=$PATH:~/node_modules/forever/bin
-
-
-
-
-################
-#
-#  maven
-#
-#
-#export M2_HOME=/usr/local/maven
-#export PATH=$PATH:$M2_HOME/bin
+export PATH=/home/isu-user/local/perl-5.20/bin:$PATH
+export PATH=/home/isu-user/local/ruby-2.1.2/bin:$PATH
+export PATH=/home/isu-user/local/node-v0.10/bin:$PATH
+export PATH=/home/isu-user/local/python-3.4.1/bin:$PATH
+export PATH=/home/isu-user/local/go/bin:$PATH
+export GOPATH=/home/isu-user/local/go/bin
+export GOROOT=/home/isu-user/local/go
+exec "$@"

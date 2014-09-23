@@ -20,6 +20,7 @@ bash "install vim 7.4" do
 		--enable-multibyte \
 		--enable-rubyinterp \
 		--enable-pythoninterp \
+    --with-python-config-dir=/usr/lib64/python2.6/config \
 		--enable-luainterp \
 		--enable-gpm \
 		--enable-cscope \

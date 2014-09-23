@@ -1,1 +1,1 @@
-default['user'] = 'yu_ke'
+default['user'] = 'isu-user'

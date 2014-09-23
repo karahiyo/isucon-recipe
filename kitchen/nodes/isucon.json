@@ -5,6 +5,7 @@
 		"recipe[yum-epel]",
 		"recipe[git]",
 		"recipe[mazuwa]",
+		"recipe[lang]",
 		"recipe[zsh]",
 		"recipe[vim]",
 		"recipe[tmux]",
