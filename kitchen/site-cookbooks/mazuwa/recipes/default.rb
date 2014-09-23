@@ -34,4 +34,10 @@ cookbook_file '/root/.gemrc' do
 	group "root"
 end
 
+bash 'setup timezone' do
+  user 'root'
+  code <<-EOC
+  cp -p  /usr/share/zoneinfo/Japan /etc/localtime
+  EOC
+end
 

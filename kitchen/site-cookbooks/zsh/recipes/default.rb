@@ -20,7 +20,7 @@ cookbook_file "/home/#{node['user']}/.zshrc_yu_ke" do
 	group "#{node['user']}"
 end
 
-cookbook_file "/home/#{node['user']}/.zshenv_yu_ke" do
+cookbook_file "/home/#{node['user']}/.zshenv" do
 	source "zshenv4user"
 	mode "644"
 	user "#{node['user']}"

@@ -169,12 +169,8 @@ augroup VimCSS3Syntax
   autocmd FileType css setlocal iskeyword+=-
 augroup END
 
-"---------
-" gauche
-"---------
-NeoBundle 'aharisu/vim_goshrepl'
-NeoBundle 'aharisu/vim-gdev'
-NeoBundle 'amdt/vim-niji'
+" nginx
+NeoBundle 'evanmiller/nginx-vim-syntax'
 
 " ------------------------------------------------------------------>
 "  powerline
@@ -200,26 +196,6 @@ filetype plugin indent on
 " If there are uninstalled bundles found on startup " this will conveniently
 " prompt you to install them.
 NeoBundleCheck
-
-" 論文もvimで書こう＼(^o^)／
-"
-" NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
-
-" TeX用設定
-" let tex_flavor = 'latex'
-" set grepprg=grep\ -nH\ $*
-" set shellslash
-" set ft=lisp
-" let g:Tex_DefaultTargetFormat = 'pdf'
-" let g:Tex_CompileRule_pdf = 'ptex2pdf -l -ot "-kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
-" let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
-" let g:Tex_CompileRule_dvi = 'platex $*'
-" " let g:Tex_CompileRule_pdf = 'pbibtex $*.aux; dvipdfmx $*.dvi'
-" let g:Tex_CompileRule_pdf = 'pbibtex $*.aux; ptex2pdf -l -ot "-kanji=utf8 -guess-input-enc -synctex=1 -interaction=nonstopmode -file-line-error-style" $*.tex'
-" let g:Tex_FormatDependency_pdf = 'dvi, pdf'
-" let g:Tex_ViewRule_pdf = 'open -a Preview.app'
-
-
 
 
 
@@ -259,11 +235,13 @@ set ruler
 set showcmd
 set autoindent " 新しいインデントを現在行と同じにする
 set cursorline
+set nocursorline
 ""set cursorcolumn
 hi clear CursorLine
 hi CursorLine gui=underline
 hi Cursor ctermbg=15 ctermfg=8
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorLine   cterm=NONE ctermbg=black ctermfg=white guibg=black guifg=white
+"  hi CursorLine   cterm=NONE ctermbg=dark ctermfg=white guibg=darkred guifg=white
 " "hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 ""nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 syntax sync minlines=256
